@@ -15,3 +15,29 @@ http://www.linuxjournal.com/article/8145
 
 libhid-detach-device 
 
+
+
+= The goal =
+
+The goal of this project is to offer an easy to use software interface to the
+[http://www.elomax.nl/site/usb/iosolution.html iosolution] based hardware. 
+
+The last release r3 (01-06-2008) provides better support for reconnecting 
+multiple time to the same hardware without forcing a reset.
+
+
+
+= Supported hardware =
+
+== custom building ==
+[http://klaas.noordstra.nl/iosolution.xhtml http://iosolution-libusb.googlecode.com/svn/trunk/www/images/klaas_noordstra_nl_experiment.jpg]
+
+== HTVision's card ==
+Unfortunately this vendor went out out busyness(05-2009)
+
+
+[http://www.htvision.com/ http://iosolution-libusb.googlecode.com/svn/trunk/www/images/htvision_card.jpg]
+
+= The alternatives =
+The iosolution "chip" from elomax offers a cheap and easy to use USB IO expander. This small c library offers a userland tool to control the IO expander. An alternative is Klaas noordstra's kernel module see [http://klaas.noordstra.nl/iosolution.xhtml his website].
+

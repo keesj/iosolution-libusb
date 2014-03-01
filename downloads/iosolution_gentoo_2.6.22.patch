@@ -1,0 +1,54 @@
+diff -u iosolution-0.6_orig/iosolution.c iosolution-0.6/iosolution.c
+--- iosolution-0.6_orig/iosolution.c	2005-10-12 23:52:51.000000000 +0200
++++ iosolution-0.6/iosolution.c	2007-11-28 14:15:38.000000000 +0100
+@@ -26,13 +26,14 @@
+ #include <linux/module.h>
+ #include <linux/init.h>
+ #include <linux/usb.h>
+-#include <linux/config.h>
++//#include <linux/config.h>
+ #include <linux/errno.h>
+ #include <linux/kref.h>
+ #include <asm/uaccess.h>
+ #include <linux/device.h>
++#include <linux/slab.h>
+ 
+-#include <linux/devfs_fs_kernel.h>
++//#include <linux/devfs_fs_kernel.h>
+ 
+ 
+ /*
+@@ -140,7 +141,7 @@
+ 			warn("input irq status %d received", urb->status);
+ 	}
+ 	
+-	status = usb_submit_urb(urb, SLAB_ATOMIC);
++	status = usb_submit_urb(urb, GFP_ATOMIC);
+ 	if (status)
+ 		err("IOSOLUTION: unable to resubmit read urb");
+ 
+@@ -440,7 +441,6 @@
+ static struct usb_class_driver iosolution_class = {
+ 	.name =		"iosolution000",
+ 	.fops =		&iosolution_fops,
+-	.mode =		S_IFCHR | S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH,
+ 	.minor_base =	IOSOLUTION_MINOR_BASE,
+ };
+ 
+@@ -510,7 +510,7 @@
+ 	}
+ 
+ 
+-	iosolution->data = usb_buffer_alloc(dev, 8, SLAB_ATOMIC, &iosolution->data_dma);
++	iosolution->data = usb_buffer_alloc(dev, 8, GFP_ATOMIC, &iosolution->data_dma);
+ 	if (!iosolution->data) {
+ 		kfree(iosolution);
+ 		return -ENOMEM;
+@@ -605,7 +605,6 @@
+ 
+ 	
+ static struct usb_driver usb_iosolution_driver = {
+-	.owner =	THIS_MODULE,
+ 	.name =		"iosolution",
+ 	.probe =	usb_iosolution_probe,
+ 	.disconnect =	usb_iosolution_disconnect,

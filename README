@@ -1,0 +1,17 @@
+Changes in r4
+Upgraded to libusb-1.0
+
+Changes in r3
+Added more documentation about the protocol used
+Defined new pin constants
+The USB interface is only claimed and set when necessary. This fixes the problem that when the program
+gets started the values are reset to 0.
+
+The best documentation I found about iosolution.
+
+http://www.htvision.com/
+http://www.elomax.nl/
+http://www.linuxjournal.com/article/8145
+
+libhid-detach-device 
+

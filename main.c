@@ -65,7 +65,7 @@ open_device(void)
 	int i = 0;
 
 	libusb_get_device_list(ctx, &list);
-	while (list[i++] != NULL) {
+	while (list[i] != NULL) {
 		dev = list[i];
 		ret = libusb_get_device_descriptor(dev, &desc);
 		if (ret != 0) {
@@ -90,6 +90,7 @@ open_device(void)
 			}
 			break;
 		}
+		i++;
 	}
 	libusb_free_device_list(list, 1);
 
